@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:udemy_flutter_delivery/src/pages/login/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  //const LoginPage({Key? key}) : super(key: key);
+  LoginController con = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +78,7 @@ class LoginPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
+        controller: con.emailController,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           hintText: 'Correo electronico',
@@ -88,6 +92,7 @@ class LoginPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
+        controller: con.passwordController,
         keyboardType: TextInputType.text,
         obscureText: true,
         decoration: InputDecoration(
@@ -103,7 +108,7 @@ class LoginPage extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () => con.login(),
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.symmetric(vertical: 15)
           ),
@@ -135,19 +140,22 @@ class LoginPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'No tienes cuenta?',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 17
+            'No tienes cuenta?',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 17
+            ),
           ),
-        ),
         SizedBox(width: 7),
-        Text(
-          'Registrate Aquí',
-          style: TextStyle(
-            color: Colors.amber,
-            fontWeight: FontWeight.bold,
-            fontSize: 17
+        GestureDetector(
+          onTap: () => con.goToRegisterPage(),
+          child: Text(
+            'Registrate Aquí',
+            style: TextStyle(
+              color: Colors.amber,
+              fontWeight: FontWeight.bold,
+              fontSize: 17
+            ),
           ),
         )
       ],
